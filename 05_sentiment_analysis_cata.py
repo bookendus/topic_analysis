@@ -6,7 +6,7 @@ from tqdm import tqdm
 IN_DATA_PATH = './data/01_out'
 OUT_DATA_PATH = './data/05_out'
 
-CANDIDATE_LABELS = ['']
+CANDIDATE_LABELS = ['첨가물','성분','위험','아기','안심','칼로리','중위험','아이','아가','들어가']
 
 # 입력 파일 로딩 RAW_DATA_PATH에 있는 파일을 DataFrame으로 읽어 드린다.
 input_files = os.listdir(IN_DATA_PATH)
@@ -54,6 +54,8 @@ for in_file in input_files:
             pbar.update(1)
 
     result_df = pd.DataFrame.from_records(result)
+
+    print(result_df.describe())
 
     result_df.to_csv(os.path.join(OUT_DATA_PATH,'result_' + in_file), encoding='utf-8-sig')
     
