@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 
 # 디렉토리를 정해준다.
 RAW_DATA_PATH = "./data/01_in"
-OUT_DATA_PATH = "./data/01_out"
+OUT_DATA_PATH = "./data/05_out"
 
 # 후보정 문자 
 REPLACING_TEXT = {'gm':'gmo', '중 위험':'중위험', '저 위험':'저위험', '고 위험':'고위험' }

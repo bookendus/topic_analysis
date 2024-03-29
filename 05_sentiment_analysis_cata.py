@@ -4,9 +4,9 @@ from transformers import pipeline
 from tqdm import tqdm
 
 IN_DATA_PATH = './data/01_out'
-OUT_DATA_PATH = './data/02_out'
+OUT_DATA_PATH = './data/05_out'
 
-CANDIDATE_LABELS = ['맛','용량','포장','성분','브랜드','가격','재료','신뢰','디자인','건강']
+CANDIDATE_LABELS = ['']
 
 # 입력 파일 로딩 RAW_DATA_PATH에 있는 파일을 DataFrame으로 읽어 드린다.
 input_files = os.listdir(IN_DATA_PATH)
@@ -21,6 +21,7 @@ input_files = os.listdir(IN_DATA_PATH)
 ko_classifier = pipeline(
     task='zero-shot-classification',
     model='MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli',
+    device=0,
 )
 
 
@@ -30,11 +31,11 @@ for in_file in input_files:
 
     print ("Starting file :%s ..."%in_file)
 
-    df = pd.read_csv(os.path.join(IN_DATA_PATH,in_file), encoding='utf-8')
-    print(df.head(3))
+    df = pd.read_csv(os.path.join(IN_DATA_PATH,in_file), encoding='utf-8-sig')
+    # print(df.head(3))
 
-    docs = df['generated_text'].tolist()
-    print(docs[:10])
+    docs = df['generated_text'].tolist()[:500]
+    # print(docs[:10])
 
     result = []
 
@@ -54,6 +55,6 @@ for in_file in input_files:
 
     result_df = pd.DataFrame.from_records(result)
 
-    result_df.to_csv(os.path.join(OUT_DATA_PATH,'result_' + in_file))
+    result_df.to_csv(os.path.join(OUT_DATA_PATH,'result_' + in_file), encoding='utf-8-sig')
     
             
