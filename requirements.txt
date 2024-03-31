@@ -7,3 +7,8 @@ kiwipiepy
 bertopic
 liqfit
 SentencePiece
+jupyter
+soynlp
+python-mecab-ko
+kss
+flash-attn
